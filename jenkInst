@@ -1,0 +1,20 @@
+#!/bin/bash
+#jenkins install on Ubuntu 18.04
+
+sudo apt update
+sudo apt install openjdk-8-jdk
+
+wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+
+sudo apt update
+sudo apt install jenkins
+
+systemctl status jenkins
+
+sudo ufw allow 8080
+sudo ufw status
+
+#make sure your vm instance has a static external IP, with port 8080 open on both fronts
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
